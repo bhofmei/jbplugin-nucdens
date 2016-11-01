@@ -34,6 +34,32 @@ Util = {
             outAr = newAr;
         }
         return outAr;
+    },
+
+    _reverseComplement: function(inStr){
+        var baseAr = ['A','C','G','T'];
+        var out = '';
+        var i,k;
+        for(i=0; i < inStr.length; i++){
+            k = array.indexOf(baseAr, inStr.charAt(i).toUpperCase());
+            if(k===-1)
+                out = 'X'+out;
+            else
+                out = baseAr[3-k] + out;
+        }
+        return out;
+    },
+
+    getPossibilities: function(inStr){
+        // first get forward possibilities
+        var nucAr = Util._transformNuc(inStr);
+        // get reverse
+        var revAr = array.map(nucAr, function(x){
+            return Util._reverseComplement(x);
+        });
+        // combine
+        nucAr.push.apply(nucAr, revAr);
+        return nucAr;
     }
 }
 return Util;
