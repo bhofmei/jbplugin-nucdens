@@ -22,6 +22,7 @@ function(
             this.store = args.store;
             this.windowSize = args.windowSize;
             this.windowDelta = args.windowDelta;
+            this.name = args.name;
             this.nucLength = args.nLength;
             this.nuc = args.nuc; // array of nucleotide sequence contexts to look for
             // note: all possibilities in nuc must be the same length - nucLength
@@ -59,7 +60,8 @@ function(
                     var feat = new CoverageFeature({
                         start: pos + i,
                         end: pos + i + thisB.windowDelta,
-                        score: score
+                        score: score,
+                        name: thisB.name
                     });
                     featureCallback(feat);
                 }
