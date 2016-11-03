@@ -12,9 +12,10 @@ function(
     JSON,
     nucleotidetable
 ){
-var Util;
+    var Util;
     var ntable = JSON.parse(nucleotidetable);
-Util = {
+
+    Util = {
 
     _transformNuc: function(inStr){
         var n = inStr.length;
@@ -54,11 +55,11 @@ Util = {
         // first get forward possibilities
         var nucAr = Util._transformNuc(inStr);
         // get reverse
-        var revAr = array.map(nucAr, function(x){
+        /*var revAr = array.map(nucAr, function(x){
             return Util._reverseComplement(x);
         });
         // combine
-        nucAr.push.apply(nucAr, revAr);
+        nucAr.push.apply(nucAr, revAr);*/
         return nucAr;
     }
 }
