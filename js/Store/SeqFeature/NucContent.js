@@ -26,9 +26,10 @@ function(
             this.refSeq = this.store.refSeq;
             this.windowSize = args.windowSize;
             this.windowDelta = args.windowDelta;
+            this.bothStrands = args.bothStrands;
             this.nuc = args.nuc;
             this.nucLength = args.nuc.length;
-            this.nucAr = StoreUtil.getPossibilities(this.nuc);
+            this.nucAr = StoreUtil.getPossibilities(this.nuc, this.bothStrands);
             this._deferred.features.resolve({success: true});
         },
 
@@ -82,6 +83,8 @@ function(
                     }
                     var pos = query.start;
                     var score = nc / rn;
+                    if(thisB.bothStrands)
+                        score /= 2;
 
                     // add to stats
                     thisB.stats.count++;

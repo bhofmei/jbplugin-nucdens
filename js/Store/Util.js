@@ -12,6 +12,9 @@ function(
     JSON,
     nucleotidetable
 ){
+    /*
+        Utility class dealing with degenerate nucleotide sequences
+    */
     var Util;
     var ntable = JSON.parse(nucleotidetable);
 
@@ -51,15 +54,17 @@ function(
         return out;
     },
 
-    getPossibilities: function(inStr){
+    getPossibilities: function(inStr, bothStrands){
         // first get forward possibilities
         var nucAr = Util._transformNuc(inStr);
         // get reverse
-        /*var revAr = array.map(nucAr, function(x){
-            return Util._reverseComplement(x);
-        });
-        // combine
-        nucAr.push.apply(nucAr, revAr);*/
+        if(bothStrands){
+            var revAr = array.map(nucAr, function(x){
+                return Util._reverseComplement(x);
+            });
+            // combine
+            nucAr.push.apply(nucAr, revAr);
+        }
         return nucAr;
     }
 }

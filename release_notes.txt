@@ -1,0 +1,6 @@
+# Release notes
+
+v0.2 - Nov 10, 2016
+- allows specifiying unlimited number of nucleotide contexts
+- multiple options to specify color of contexts default to random (not truly random but equidistant colors)
+- ability to compute density using forward strand or both strands
