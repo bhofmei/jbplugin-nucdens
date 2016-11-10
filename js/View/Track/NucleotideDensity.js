@@ -4,10 +4,10 @@ define([
     'dojo/_base/lang',
    'dojo/_base/Color',
     'dojox/color',
-    'NucleotideDensityPlugin/Store/SeqFeature/NucContentMulti',
+    'NucleotideDensityPlugin/Store/SeqFeature/NucDensityMulti',
     'JBrowse/View/Track/Wiggle/Density',
     'JBrowse/Util',
-    'dijit/Tooltip'
+    'NucleotideDensityPlugin/View/Dialog/NucleotideDensityDialog'
 ],
 function(
     declare,
@@ -18,7 +18,7 @@ function(
     NucContent,
     WiggleDensity,
     Util,
-     Tooltip
+    NucDensDialog
 ) {
     return declare(WiggleDensity, {
         constructor: function() {
@@ -225,34 +225,28 @@ function(
                     }
                 }, this);
             }
-        }
-        /*_trackMenuOptions: function() {
+        },
+        _trackMenuOptions: function() {
             var track = this;
             var options = this.inherited(arguments);
-            options.push({
-                label: 'GC Track Options',
+            options.push(
+                { type: 'dijit/MenuSeparator' },
+                {
+                label: 'Track options',
+                iconClass: 'dijitIconFunction',
                 onClick: function() {
-                    new WindowSize({
+                    new NucDensDialog({
                         setCallback: function(ws, wd, mode) {
                             track.config.windowSize = ws;
                             track.config.windowDelta = wd;
-                            track.config.gcMode = mode;
-                            if (mode === 'skew') {
-                                track.config.min_score = -1;
-                                track.config.bicolor_pivot = 0;
-                            } else {
-                                track.config.min_score = 0;
-                                track.config.bicolor_pivot = 0.5;
-                            }
                             track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                         },
                         windowSize: track.config.windowSize,
                         windowDelta: track.config.windowDelta,
-                        gcMode: track.config.gcMode
                     }).show();
                 }
             });
             return options;
-        }*/
+        }
     });
 });
