@@ -1,12 +1,10 @@
 define([
            'dojo/_base/declare',
-           'JBrowse/Plugin',
-    'NucleotideDensityPlugin/Store/Util'
+           'JBrowse/Plugin'
        ],
        function(
            declare,
-           JBrowsePlugin,
-            storeUtil
+           JBrowsePlugin
        ) {
 return declare( JBrowsePlugin,
 {
@@ -19,18 +17,8 @@ return declare( JBrowsePlugin,
 
         browser.registerTrackType({
            label: 'NucDensity',
-            type: 'NucleotideDensityPlugin/View/Track/NucDensityMulti'
+            type: 'NucleotideDensityPlugin/View/Track/NucleotideDensity'
         });
-        /*var p = new ndstore({context:['CG'], windowDelta: 100, windowSize: 500, browser: browser, refSeq: 'stuff'});
-        console.log(p);*/
-        /*var m = 'chg';
-        var t = storeUtil._transformNuc(m);
-        //console.log(m,t);
-        m='whh';
-        var t = storeUtil._transformNuc(m);
-        //console.log(m,t);
-        //console.log('jls', storeUtil._reverseComplement('jls'));
-        console.log('chh',storeUtil.getPossibilities('chh'));*/
     }
 });
 });
