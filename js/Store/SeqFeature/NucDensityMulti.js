@@ -7,7 +7,7 @@ define([
     'JBrowse/Store/SeqFeature',
     'JBrowse/Store/DeferredStatsMixin',
     'JBrowse/Store/DeferredFeaturesMixin',
-    'NucleotideDensityPlugin/Store/SeqFeature/NucContent'
+    'NucleotideDensityPlugin/Store/SeqFeature/NucDensity'
 ],
 function(
     declare,
@@ -18,7 +18,7 @@ function(
     SeqFeatureStore,
     DeferredFeaturesMixin,
     DeferredStatsMixin,
-    NucContent
+    NucDensity
 ) {
     /*
         Based on MultiBigWig storage class but adapted for use with nucleotide density
@@ -29,7 +29,7 @@ function(
             var thisB = this;
             this.contexts = args.contexts;
             this.stores = array.map(args.contexts, function(context) {
-                return new NucContent(lang.mixin(args, { nuc: context }));
+                return new NucDensity(lang.mixin(args, { nuc: context }));
             });
             //console.log(this.stores);
             all(array.map(this.stores, function(store) {
