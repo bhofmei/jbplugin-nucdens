@@ -4,9 +4,10 @@ define([
     'dojo/_base/lang',
    'dojo/_base/Color',
     'dojox/color',
-    'NucleotideDensityPlugin/Store/SeqFeature/NucDensityMulti',
     'JBrowse/View/Track/Wiggle/Density',
     'JBrowse/Util',
+    'NucleotideDensityPlugin/Store/SeqFeature/NucDensityMulti',
+    'NucleotideDensityPlugin/View/ColorHandler',
     'NucleotideDensityPlugin/View/Dialog/NucleotideDensityDialog'
 ],
 function(
@@ -15,9 +16,10 @@ function(
     lang,
     Color,
     dojoxColor,
-    NucContent,
     WiggleDensity,
     Util,
+    NucContent,
+    ColorHandler,
     NucDensDialog
 ) {
     return declare(WiggleDensity, {
@@ -30,11 +32,11 @@ function(
                 bothStrands: this.config.bothStrands,
                 contexts: this.config.context
             });
-            var tmp = [''].concat(this.config.context);
+            //var tmp = [''].concat(this.config.context);
             this.labels = array.map(this.config.context, function(ctx){
                 return {name: ctx};
             });
-            this.randomColors = this._generateRandomColors(this.config.context);
+            this.randomColors = ColorHandler.generateRandomColors(this.config.context);
         },
 
         _defaultConfig: function() {
@@ -55,7 +57,7 @@ function(
             });
         },
 
-        getConfigColor: function( seqCtx ){
+        /*getConfigColor: function( seqCtx ){
             var color = this.config.colors;
             // random
             if(color === 'random')
@@ -74,6 +76,10 @@ function(
                 return color[seqCtx]
             else
                 return this.randomColors[seqCtx]
+        },*/
+
+        getConfigColor: function(seqCtx){
+            return ColorHandler.getConfigColor(seqCtx, this.config.contexts, this.config.colors, this.randomColors);
         },
 
         getConfForFeature: function(opt, feature){
@@ -81,33 +87,6 @@ function(
                 return this.getConfigColor(feature.name);
             else
                 return this.inherited(arguments);
-        },
-
-        getFontColor: function(color){
-            // from http://stackoverflow.com/questions/1855884/determine-font-color-based-on-background-color
-            var bg = new Color(color);
-            var rgb = bg.toRgb();
-            var a = 1 - ( 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2])/255;
-            if(a >= 0.5)
-                return '#F0F0F0';
-            else
-                return '#010101';
-        },
-
-        _generateRandomColors: function( labels ){
-            // take in list of labels and return object with equidistant colors
-            var s=100, l=65, sep=360/labels.length;
-            var hs=[];
-            var i;
-            for(i=0; i < labels.length; i++){
-                hs.push({name: labels[i], value: sep*i});
-            }
-            var colors ={};
-            array.forEach(hs, function(h){
-               var t = dojoxColor.fromHsl(h.value, s, l);
-                colors[h.name] =t.toHex();
-            });
-            return colors;
         },
 
         _calculatePixelScores: function(canvasWidth, features, featureRects) {
@@ -203,7 +182,7 @@ function(
                             width: thisB.config.labelWidth ? thisB.config.labelWidth + 'px' : null,
                             font: thisB.config.labelFont,
                             backgroundColor: bg,
-                            color: thisB.getFontColor(bg)
+                            color: ColorHandler.getFontColor(bg)
                         },
                         innerHTML: elt.name,
                         title: elt.name
