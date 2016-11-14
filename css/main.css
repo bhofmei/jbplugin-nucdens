@@ -1,3 +1,4 @@
+/*@import url("../../../src/dojox/widget/ColorPicker/ColorPicker.css");*/
 
 div.nuc-dens-sublabel {
     z-index: 10;
@@ -16,5 +17,54 @@ div.nuc-dens-sublabel.last {
 
 div#nuc-dens-parameters{
     border-bottom: 1px solid lightgray;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
+}
+
+/* dialog table options */
+
+table#nuc-dens-tbl{
+    border-collapse: collapse;
+    margin-top: 3px;
+}
+#nuc-dens-tbl th{
+    font-weight: bold;
+    padding-right: 5px;
+    padding-left: 3px;
+}
+
+td#nuc-dens-tbl-clrtype span{
+    margin: 0px 1px 0px 3px;
+}
+td.nuc-dens-tbl-ctx-col div.dijitTextBox {
+    width: 75px;
+    background: white;
+}
+
+td.nuc-dens-tbl-clr-col div.dijitTextBox {
+    width: 75px;
+    background: white;
+}
+td.nuc-dens-tbl-ctx-col{
+    padding: 1px 3px 1px 0px;
+}
+td.nuc-dens-tbl-clr-col{
+    border-left: 1px solid black;
+    padding-left: 3px;
+}
+
+td.nuc-dens-tbl-ctx-col div.dijitTextBox input.nuc-dens-tbl-txt{
+    padding-bottom: 1px;
+    width: 50px;
+}
+td.nuc-dens-tbl-clr-col div.dijitTextBox input.nuc-dens-tbl-txt{
+    width: 75px;
+}
+
+.nuc-dens-tbl-txt{
+    border: none;
+}
+
+.nuc-dens-tbl-clr-view{
+    height: 16px;
+    width: 75px;
 }

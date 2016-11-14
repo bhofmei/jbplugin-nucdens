@@ -222,6 +222,9 @@ function(
                         },
                         windowSize: track.config.windowSize,
                         windowDelta: track.config.windowDelta,
+                        contexts: track.config.context,
+                        colors: track.config.colors,
+                        randomColors: track.randomColors
                     }).show();
                 }
             });
