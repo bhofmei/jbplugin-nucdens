@@ -65,7 +65,17 @@ ColorHandler = {
             return colorConfig[seqCtx]
         else
             return randomColors[seqCtx]
-    }
+    },
+
+    getColorType: function( colorConfig ){
+        // return "random", "single", or "individual"
+        if(colorConfig === 'random')
+            return 'random';
+        else if(typeof colorConfig === 'string')
+            return 'single';
+        else
+            return 'individual';
+    },
 
     }
 return ColorHandler;
