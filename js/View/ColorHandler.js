@@ -22,18 +22,27 @@ ColorHandler = {
 
     generateRandomColors: function( labels ){
         // take in list of labels and return object with equidistant colors
-        var s=100, l=65, sep=360/labels.length;
+        var rColors = this.generateNColors(labels.length);
+        var colors ={};
+        var i;
+        for(i=0; i<labels.length; i++){
+            colors[labels[i]] = rColors[i];
+        }
+        return colors;
+    },
+
+    generateNColors: function(n){
+        var s=100, l=65, sep=360/n;
         var hs=[];
         var i;
-        for(i=0; i < labels.length; i++){
-            hs.push({name: labels[i], value: sep*i});
+        for(i=0; i < n; i++){
+            hs.push(sep*i);
         }
-        var colors ={};
-        array.forEach(hs, function(h){
-           var t = dojoxColor.fromHsl(h.value, s, l);
-            colors[h.name] =t.toHex();
+        var out = array.map(hs, function(h){
+            var t = dojoxColor.fromHsl(h, s, l);
+            return t.toHex();
         });
-        return colors;
+        return out;
     },
 
     getFontColor: function(color){
@@ -56,9 +65,7 @@ ColorHandler = {
             return colorConfig
         // array
         else if(Array.isArray(colorConfig)){
-            var j = array.indexOf(seqCtx, contextConfig);
-            j %= colorConfig.length;
-            return colorConfig[j];
+            return this.contextToColorFromList(seqCtx, contextConfig, colorConfig, true);
         }
         // object
         else if(colorConfig.hasOwnProperty(seqCtx))
@@ -76,6 +83,21 @@ ColorHandler = {
         else
             return 'individual';
     },
+
+    contextToColorFromList: function(seqCtx, contextList, colorList, repeatable=true){
+        var k = 0;
+        for(k=0; k<contextList.length; k++)
+            if(contextList[k]===seqCtx)
+                break;
+        return this.intToColorFromList(k, colorList, repeatable);
+    },
+
+    intToColorFromList: function(n, colorList, repeatable){
+        if(n >= colorList.length && !repeatable)
+            return undefined;
+        n %= colorList.length;
+        return colorList[n];
+    }
 
     }
 return ColorHandler;
