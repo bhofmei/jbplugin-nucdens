@@ -1,6 +1,11 @@
 # Release notes
 
-v0.5 - Nov 11, 2016
+v0.6 - Nov 21, 2016
+- on hover over track, show density score for sequence contexts
+- scores are listed in order of context and color coded
+- option to show/hide scores
+
+v0.5 - Nov 21, 2016
 - functional dialog box to add/remove contexts, set colors, change window size/delta, and min/max density
 - check box in track menu to use both strands or forward only to compute density
 - removed non-functional "Change score range" option in track menu
