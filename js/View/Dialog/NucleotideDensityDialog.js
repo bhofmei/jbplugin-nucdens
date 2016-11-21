@@ -48,9 +48,11 @@ function(
         title: 'Set Nucleotide Density Track Options',
 
         constructor: function(args) {
-            this.windowSize      = args.windowSize || 100;
-            this.windowDelta     = args.windowDelta || 10;
-            this.browser         = args.browser;
+            this.windowSize = args.windowSize || 100;
+            this.windowDelta = args.windowDelta || 10;
+            this.minScore = args.minScore || 0;
+            this.maxScore = args.maxScore || 1;
+            this.browser = args.browser;
             this.contexts = args.contexts || [];
             this.colors = args.colors;
             this.colorType = ColorHandler.getColorType(this.colors);
@@ -74,7 +76,9 @@ function(
                 onClick: lang.hitch(this, function() {
                     var windowSize = +this.windowSizeSpinner.getValue();
                     var windowDelta = +this.windowDeltaSpinner.getValue();
-                    if (isNaN(windowSize) || isNaN(windowDelta)) {
+                    var minScore = +this.minDensitySpinner.getValue();
+                    var maxScore = +this.maxDensitySpinner.getValue();
+                    if (isNaN(windowSize) || isNaN(windowDelta) || isNaN(minScore) || isNaN(maxScore)) {
                         return;
                     }
                     var returnCtxA = array.map(this.contextInputs, function(input){
@@ -87,7 +91,7 @@ function(
                     //console.log(returnCtx);
                     var returnClr = this._getColorCallback();
 
-                    this.setCallback && this.setCallback(windowSize, windowDelta, returnCtx, returnClr);
+                    this.setCallback && this.setCallback(windowSize, windowDelta, minScore, maxScore, returnCtx, returnClr);
                     this.hide();
                 })
             }).placeAt(actionBar);
@@ -99,26 +103,6 @@ function(
                     this.hide();
                 })
             }).placeAt(actionBar);
-        },
-
-        _getColorCallback: function(){
-            var thisB = this;
-            if(this.colorType === 'random')
-                return 'random';
-            else if(this.colorType === 'single')
-                return this.singleColor;
-            else {
-                var outObj = {};
-                var cnt=0;
-                // loop through context inputs
-                array.forEach(thisB.contextInputs, function(ctx){
-                   if(ctx.value !== ''){
-                       outObj[ctx.value] = thisB.indivColors[cnt];
-                   }
-                    cnt++;
-                });
-                return outObj;
-            }
         },
 
         show: function(/* callback */) {
@@ -141,29 +125,73 @@ function(
 
         _createTopPane: function(obj){
             var thisB = this;
-             this.windowSizeSpinner = new NumberSpinner({
+            // create table for these parameters
+            var tblo = domConstr.create('table',{id:'nuc-dens-tbl-param', className: 'nuc-dens-dialog-tbl'}, obj);
+            var widths = [100, 75, 75, 50];
+            // delete, ctx, color preview, color input
+            for(var i=0;i<widths.length; i++){
+                domConstr.create('col',{width:widths[i]+'px'},tblo);
+            }
+            var tbl = domConstr.create('tbody',{},tblo);
+            var row, data0, data1, data2, data3;
+
+            // row 1 - window size and min score
+            row = domConstr.create('tr', {}, tbl);
+            // window size
+            data0 = domConstr.create('td',{}, row);
+            domConstr.create('span',{className: 'nuc-dens-param-lbl', innerHTML: 'Window size (bp)'}, data0);
+            data1 = domConstr.create('td',{className: 'nuc-dens-param-wnd-spin-col'}, row);
+            this.windowSizeSpinner = new NumberSpinner({
                 value: thisB.windowSize,
                 smallDelta: 10,
-                id: 'nuc-dens-window-size'
+                style: 'width:70px;'
             });
-            domConstr.create('label', { for: 'nuc-dens-window-size', innerHTML: 'Window size (bp)', className: 'nuc-dens-param-lbl' }, obj);
-            this.windowSizeSpinner.placeAt(obj);
-            domConstr.create('br',{},obj);
+            /*domConstr.create('label', { for: 'nuc-dens-window-size', innerHTML: 'Window size (bp)', className: 'nuc-dens-param-lbl' }, obj);*/
+            this.windowSizeSpinner.placeAt(data1);
 
+            // min density
+            data2 = domConstr.create('td',{className: 'nuc-dens-param-dens-col'}, row);
+            domConstr.create('span',{className: 'nuc-dens-param-lbl', innerHTML: 'Min. density'}, data2);
+            data3 = domConstr.create('td',{}, row);
+            this.minDensitySpinner = new NumberSpinner({
+                value: thisB.minScore,
+                smallDelta: 0.1,
+                constraints:{min:0,max:1,places:2},
+                style: 'width:50px;'
+            });
+            this.minDensitySpinner.placeAt(data3);
+
+            // row 2 - window delta and max score
+            row = domConstr.create('tr', {}, tbl);
+            // window size
+            data0 = domConstr.create('td',{}, row);
+            domConstr.create('span',{className: 'nuc-dens-param-lbl', innerHTML: 'Window delta (bp)'}, data0);
+            data1 = domConstr.create('td',{className: 'nuc-dens-param-wnd-spin-col'}, row);
             this.windowDeltaSpinner = new NumberSpinner({
                 value: thisB.windowDelta,
                 smallDelta: 10,
-                id: 'nuc-dens-window-delta'
+                style: 'width:70px;'
             });
-            domConstr.create('label', { for: 'nuc-dens-window-delta', innerHTML: 'Window delta (bp)', className: 'nuc-dens-param-lbl' }, obj);
-            this.windowDeltaSpinner.placeAt(obj);
-            domConstr.create('br',{},obj);
+            this.windowDeltaSpinner.placeAt(data1);
+
+            // min density
+            data2 = domConstr.create('td',{className: 'nuc-dens-param-dens-col'}, row);
+            domConstr.create('span',{className: 'nuc-dens-param-lbl', innerHTML: 'Max. density'}, data2);
+            data3 = domConstr.create('td',{}, row);
+            this.maxDensitySpinner = new NumberSpinner({
+                value: thisB.maxScore,
+                smallDelta: 0.1,
+                constraints:{min:0,max:1,places:2},
+                style: 'width:50px;'
+            });
+            this.maxDensitySpinner.placeAt(data3);
+
         },
 
         _createBottomPane: function(obj){
             var thisB = this;
-            var tblo = domConstr.create('table',{id:'nuc-dens-tbl'}, obj);
-            var widths = [20, 75, 100, 100];
+            var tblo = domConstr.create('table',{id:'nuc-dens-tbl', className: 'nuc-dens-dialog-tbl'}, obj);
+            var widths = [25, 75, 100, 100];
             // delete, ctx, color preview, color input
             for(var i=0;i<widths.length; i++){
                 domConstr.create('col',{width:widths[i]+'px'},tblo);
@@ -438,6 +466,26 @@ function(
                 this._updateRandomColor();
             if(this.colorType === 'single' )
                 domStyle.set(this.colorInputs[newIndex].domNode, 'visibility', 'hidden');
+        },
+
+        _getColorCallback: function(){
+            var thisB = this;
+            if(this.colorType === 'random')
+                return 'random';
+            else if(this.colorType === 'single')
+                return this.singleColor;
+            else {
+                var outObj = {};
+                var cnt=0;
+                // loop through context inputs
+                array.forEach(thisB.contextInputs, function(ctx){
+                   if(ctx.value !== ''){
+                       outObj[ctx.value] = thisB.indivColors[cnt];
+                   }
+                    cnt++;
+                });
+                return outObj;
+            }
         },
 
         hide: function() {

@@ -50,33 +50,9 @@ function(
                 showLabels: true,
                 colors: 'random',
                 bothStrands: false
-                /*style:{
-                    pos_color: 'red',
-                    neg_color: 'white'
-                }*/
             });
         },
 
-        /*getConfigColor: function( seqCtx ){
-            var color = this.config.colors;
-            // random
-            if(color === 'random')
-                return this.randomColors[seqCtx]
-            // other string
-            else if(typeof color === 'string')
-                return color
-            // array
-            else if(Array.isArray(color)){
-                var j = array.indexOf(seqCtx, this.config.context);
-                j %= color.length;
-                return color[j];
-            }
-            // object
-            else if(color.hasOwnProperty(seqCtx))
-                return color[seqCtx]
-            else
-                return this.randomColors[seqCtx]
-        },*/
 
         getConfigColor: function(seqCtx){
             return ColorHandler.getConfigColor(seqCtx, this.config.contexts, this.config.colors, this.randomColors);
@@ -191,6 +167,7 @@ function(
                 });
             }
         },
+
         updateStaticElements: function(/** Object*/ coords) {
             this.inherited(arguments);
             var height = this.config.style.height - 2;
@@ -215,20 +192,25 @@ function(
                 iconClass: 'dijitIconFunction',
                 onClick: function() {
                     new NucDensDialog({
-                        setCallback: function(ws, wd, ctx, clr) {
+                        setCallback: function(ws, wd, minsc, maxsc, ctx, clr) {
                             track.config.windowSize = ws;
                             track.config.windowDelta = wd;
                             track.config.context = ctx;
                             track.config.colors = clr;
+                            track.config.min_score = minsc;
+                            track.config.max_score = maxsc;
                             track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                         },
                         windowSize: track.config.windowSize,
                         windowDelta: track.config.windowDelta,
+                        minScore: track.config.min_score,
+                        maxScore: track.config.max_score,
                         contexts: track.config.context,
                         colors: track.config.colors
                     }).show();
                 }
-            });
+                }
+            );
             return options;
         }
     });
