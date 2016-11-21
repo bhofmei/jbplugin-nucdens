@@ -1,4 +1,17 @@
 /*@import url("../../../src/dojox/widget/ColorPicker/ColorPicker.css");*/
+/* plus and minus icons */
+
+.nucDensAddIcon, .nucDensRemoveIcon{
+    background-image: url('../img/plus_minus.png');
+    width: 14px;
+    height: 14px;
+}
+.nucDensRemoveIcon{
+    background-position: 0;
+}
+.nucDensAddIcon{
+    background-position: -28px;
+}
 
 div.nuc-dens-sublabel {
     z-index: 10;
@@ -19,9 +32,20 @@ div#nuc-dens-parameters{
     border-bottom: 1px solid lightgray;
     padding-bottom: 5px;
 }
+div#nuc-dens-parameters .dijitTextBox{
+    margin: 2px 0px;
+}
+.nuc-dens-param-lbl{
+    display: inline-block;
+    width: 100px;
+    margin-right: 3px
+}
 
 /* dialog table options */
-
+#nuc-dens-contexts{
+    max-height: 400px;
+    overflow: auto;
+}
 table#nuc-dens-tbl{
     border-collapse: collapse;
     margin-top: 3px;
@@ -33,21 +57,19 @@ table#nuc-dens-tbl{
 }
 
 td#nuc-dens-tbl-clrtype span{
-    margin: 0px 1px 0px 3px;
+    margin: 0px 1px 0px 5px;
 }
-td.nuc-dens-tbl-ctx-col div.dijitTextBox {
+td.nuc-dens-tbl-ctx-col div.dijitTextBox,
+td.nuc-dens-tbl-clr-col div.dijitTextBox,
+td.nuc-dens-tbl-clr-view-col div.dijitTextBox {
     width: 75px;
     background: white;
 }
 
-td.nuc-dens-tbl-clr-col div.dijitTextBox {
-    width: 75px;
-    background: white;
-}
 td.nuc-dens-tbl-ctx-col{
     padding: 1px 3px 1px 0px;
 }
-td.nuc-dens-tbl-clr-col{
+td.nuc-dens-tbl-clr-view-col{
     border-left: 1px solid black;
     padding-left: 3px;
 }
@@ -56,7 +78,9 @@ td.nuc-dens-tbl-ctx-col div.dijitTextBox input.nuc-dens-tbl-txt{
     padding-bottom: 1px;
     width: 50px;
 }
-td.nuc-dens-tbl-clr-col div.dijitTextBox input.nuc-dens-tbl-txt{
+td.nuc-dens-tbl-clr-col div.dijitTextBox input.nuc-dens-tbl-txt,
+td.nuc-dens-tbl-clr-view-col div.dijitTextBox input.nuc-dens-tbl-txt
+{
     width: 75px;
 }
 
@@ -68,3 +92,15 @@ td.nuc-dens-tbl-clr-col div.dijitTextBox input.nuc-dens-tbl-txt{
     height: 16px;
     width: 75px;
 }
+
+.nuc-dens-tbl-btn span.dijitButtonText{
+    padding: 0px;
+}
+.nuc-dens-tbl-del-col span.dijitButtonNode,
+.nuc-dens-tbl-add-col span.dijitButtonNode{
+    padding: 0px 1px;
+}
+.nuc-dens-tbl-del-col span.dijitButton{
+    margin: 0.1em;
+}
+
