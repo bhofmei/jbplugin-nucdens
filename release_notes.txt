@@ -1,5 +1,10 @@
 # Release notes
 
+v0.5 - Nov 11, 2016
+- functional dialog box to add/remove contexts, set colors, change window size/delta, and min/max density
+- check box in track menu to use both strands or forward only to compute density
+- removed non-functional "Change score range" option in track menu
+
 v0.2 - Nov 10, 2016
 - allows specifiying unlimited number of nucleotide contexts
 - multiple options to specify color of contexts default to random (not truly random but equidistant colors)
