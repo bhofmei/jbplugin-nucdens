@@ -51,30 +51,27 @@ For all contexts, density is indicated by the intensity of color. Color is compu
 Density is scaled to the track configuration `min_score` and `max_score`.
  
 Color can be specified in four ways.
- 
+
 1. Random [default]    
 Equidistant colors are assigned to each context based on the number of contexts specified. 
-```
-    "colors": "random"
-```
 
-2. Single Color    
+    `"colors": "random"`
+
+1. Single Color    
 A single color is used for all contexts. Color can be specified as a string or hexidecimal value
-```
-    "colors" : "hotpink"
-```
 
-3. Array    
+    `"colors" : "hotpink"`
+
+1. Array    
 Colors in the array for assigned to each context based on order. If there are more contexts than colors specified, colors are reused in order.
-```
-    "colors" : ["red", "orange", "yellow", "greenyellow"]
-```
 
-4. Object    
-Colors can be specified using a javascript object assigning a color to each context. If a context is not assigned a color, the cooresponding "random" color is used.
-```
-    "colors" : { "CG" : "#A36085", "CHG": "#0072B2", "CHH" : "#CF8F00", "CH" : "#88C043" }
-```
+    `"colors" : ["red", "orange", "yellow", "greenyellow"]`
+
+1. Object    
+Colors can be specified using a javascript object assigning a color to each context. If a context is not assigned a color, the coresponding "random" color is used.
+
+    `"colors" : { "CG" : "#A36085", "CHG": "#0072B2", "CHH" : "#CF8F00", "CH" : "#88C043" }`
+
 
 ![Example for color parameters](img/example_colors.png)
   
