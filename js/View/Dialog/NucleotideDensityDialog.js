@@ -156,7 +156,7 @@ function(
             this.minDensitySpinner = new NumberSpinner({
                 value: thisB.minScore,
                 smallDelta: 0.1,
-                constraints:{min:0,max:1,places:2},
+                constraints:{min:0,max:1},
                 style: 'width:50px;'
             });
             this.minDensitySpinner.placeAt(data3);
@@ -181,7 +181,7 @@ function(
             this.maxDensitySpinner = new NumberSpinner({
                 value: thisB.maxScore,
                 smallDelta: 0.1,
-                constraints:{min:0,max:1,places:2},
+                constraints:{min:0,max:1},
                 style: 'width:50px;'
             });
             this.maxDensitySpinner.placeAt(data3);
