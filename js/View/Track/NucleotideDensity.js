@@ -45,9 +45,9 @@ function(
                 max_score: 1,
                 windowSize: 100,
                 windowDelta: 10,
-                //scoreType: 'avgScore',
                 logScaleOption: false,
                 showLabels: true,
+                showScores: true,
                 colors: 'random',
                 bothStrands: false
             });
@@ -92,7 +92,54 @@ function(
                 }
             }, this);
 
+            // create score displays
+            for(var i=0; i<pixelValues.length; i++){
+                if(pixelValues[i]){
+                    var tmp = '';
+                    for(var k=0; k< this.labels.length; k++){
+                        var clr = this.getConfigColor(this.labels[k].name);
+                        var fntClr = ColorHandler.getFontColor(clr);
+                        tmp += '<div class="nuc-dens-wiggle-display" ' +
+                            'style="background-color:'+clr+'; color:'+fntClr+';">' +
+                            pixelValues[i][k]['score'].toPrecision(6).toString() + '</div>';
+                    }
+                    pixelValues[i]['score'] = tmp;
+                }
+            }
             return pixelValues;
+        },
+
+        _showPixelValue: function( scoreDisplay, score ) {
+            if( this.config.showScores === false)
+                return false;
+            var scoreType = typeof score;
+            if( scoreType == 'number' ) {
+                // display the score with only 6
+                // significant digits, avoiding
+                // most confusion about the
+                // approximative properties of
+                // IEEE floating point numbers
+                // parsed out of BigWig files
+                scoreDisplay.innerHTML = parseFloat( score.toPrecision(6) );
+                return true;
+            }
+            else if( scoreType == 'string' ) {
+                scoreDisplay.innerHTML = score;
+                return true;
+            }
+            else if( score && typeof score['score'] == 'number' ) {
+                // "score" may be an object.
+                scoreDisplay.innerHTML = parseFloat( score['score'].toPrecision(6) );
+                return true;
+            }
+            else if( score && typeof score['score'] == 'string' ) {
+                // "score" may be an object.
+                scoreDisplay.innerHTML =score['score'];
+                return true;
+            }
+            else {
+                return false;
+            }
         },
 
         _drawFeatures: function(scale, leftBase, rightBase, block, canvas, pixels, dataScale) {
@@ -221,6 +268,26 @@ function(
                     checked: track.config.bothStrands,
                     onClick: function(evt){
                         track.config.bothStrands = this.checked;
+                        track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
+                    }
+                },
+                {
+                    label: 'Show labels',
+                    title: 'show sequence context labels on track',
+                    type: 'dijit/CheckedMenuItem',
+                    checked: track.config.showLabels,
+                    onClick: function(evt){
+                        track.config.showLabels = this.checked;
+                        track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
+                    }
+                },
+                {
+                    label: 'Show scores',
+                    title: 'show density scores when mouseover track',
+                    type: 'dijit/CheckedMenuItem',
+                    checked: track.config.showScores,
+                    onClick: function(evt){
+                        track.config.showScores = this.checked;
                         track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                     }
                 }

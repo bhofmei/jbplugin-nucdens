@@ -121,3 +121,12 @@ td.nuc-dens-tbl-clr-view-col div.dijitTextBox input.nuc-dens-tbl-txt
     padding-top: 0.5em;
 }
 
+
+/* wiggle display */
+div.nuc-dens-wiggle-display{
+    font-size: smaller;
+}
+div.track_nucleotidedensityplugin_view_track_nucleotidedensity div.wiggleValueDisplay{
+    background: #e6e6e6;
+    padding: 1px;
+}

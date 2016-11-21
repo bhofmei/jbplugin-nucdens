@@ -85,10 +85,11 @@ Additional parameters that can be specified for the track configuration.
 * `"windowSize" : 100`  , window size for sliding window when computing density
 * `"windowDelta" : 10`  , window step size for sliding window
 * `"showLabels" : true`  , show context sublabels on track
+* `"showScores" : true`  , show density value when mouse is over the track
 * `"bothStrands" : false`  , use sequence on forward strand only or both strands to compute density
 * `"style" : { "height" : 70 }`  , track height
 
 
 ##Future Plans
-- Show pixel score along track for each sequence context
 - Ability to add track locally by adding option to menu bar, "File"
+- Possibly improved score view (currently works fine but is not visually appealing)
