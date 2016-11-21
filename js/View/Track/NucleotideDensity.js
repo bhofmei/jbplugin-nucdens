@@ -215,16 +215,17 @@ function(
                 iconClass: 'dijitIconFunction',
                 onClick: function() {
                     new NucDensDialog({
-                        setCallback: function(ws, wd, mode) {
+                        setCallback: function(ws, wd, ctx, clr) {
                             track.config.windowSize = ws;
                             track.config.windowDelta = wd;
+                            track.config.context = ctx;
+                            track.config.colors = clr;
                             track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                         },
                         windowSize: track.config.windowSize,
                         windowDelta: track.config.windowDelta,
                         contexts: track.config.context,
-                        colors: track.config.colors,
-                        randomColors: track.randomColors
+                        colors: track.config.colors
                     }).show();
                 }
             });
