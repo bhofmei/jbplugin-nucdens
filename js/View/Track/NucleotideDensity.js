@@ -188,27 +188,37 @@ function(
             options.push(
                 { type: 'dijit/MenuSeparator' },
                 {
-                label: 'Track options',
-                iconClass: 'dijitIconFunction',
-                onClick: function() {
-                    new NucDensDialog({
-                        setCallback: function(ws, wd, minsc, maxsc, ctx, clr) {
-                            track.config.windowSize = ws;
-                            track.config.windowDelta = wd;
-                            track.config.context = ctx;
-                            track.config.colors = clr;
-                            track.config.min_score = minsc;
-                            track.config.max_score = maxsc;
-                            track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
-                        },
-                        windowSize: track.config.windowSize,
-                        windowDelta: track.config.windowDelta,
-                        minScore: track.config.min_score,
-                        maxScore: track.config.max_score,
-                        contexts: track.config.context,
-                        colors: track.config.colors
-                    }).show();
-                }
+                    label: 'Track options',
+                    iconClass: 'dijitIconFunction',
+                    onClick: function() {
+                        new NucDensDialog({
+                            setCallback: function(ws, wd, minsc, maxsc, ctx, clr) {
+                                track.config.windowSize = ws;
+                                track.config.windowDelta = wd;
+                                track.config.context = ctx;
+                                track.config.colors = clr;
+                                track.config.min_score = minsc;
+                                track.config.max_score = maxsc;
+                                track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
+                            },
+                            windowSize: track.config.windowSize,
+                            windowDelta: track.config.windowDelta,
+                            minScore: track.config.min_score,
+                            maxScore: track.config.max_score,
+                            contexts: track.config.context,
+                            colors: track.config.colors
+                        }).show();
+                    }
+                },
+                {
+                    label: 'Use both strands',
+                    title: 'use both strands or forward strand only to compute density',
+                    type: 'dijit/CheckedMenuItem',
+                    checked: track.config.bothStrands,
+                    onClick: function(evt){
+                        track.config.bothStrands = this.checked;
+                        track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
+                    }
                 }
             );
             return options;
