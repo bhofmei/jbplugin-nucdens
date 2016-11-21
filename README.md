@@ -76,7 +76,7 @@ Colors can be specified using a javascript object assigning a color to each cont
     "colors" : { "CG" : "#A36085", "CHG": "#0072B2", "CHH" : "#CF8F00", "CH" : "#88C043" }
 ```
 
-![Example for color parameters]('img/example_colors.png')
+![Example for color parameters](img/example_colors.png)
   
 ###Addititional Parameters
 Additional parameters that can be specified for the track configuration.
