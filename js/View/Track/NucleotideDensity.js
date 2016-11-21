@@ -55,7 +55,7 @@ function(
 
 
         getConfigColor: function(seqCtx){
-            return ColorHandler.getConfigColor(seqCtx, this.config.contexts, this.config.colors, this.randomColors);
+            return ColorHandler.getConfigColor(seqCtx, this.config.context, this.config.colors, this.randomColors);
         },
 
         getConfForFeature: function(opt, feature){
@@ -185,6 +185,10 @@ function(
         _trackMenuOptions: function() {
             var track = this;
             var options = this.inherited(arguments);
+            // remove trackScoreChange menu option if included
+            var lastOpt = options[options.length-1];
+            if(lastOpt.hasOwnProperty('iconClass') && lastOpt.iconClass === 'trackScoreIcon')
+                options.pop();
             options.push(
                 { type: 'dijit/MenuSeparator' },
                 {
