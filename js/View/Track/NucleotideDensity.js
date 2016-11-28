@@ -49,7 +49,10 @@ function(
                 showLabels: true,
                 showScores: true,
                 colors: 'random',
-                bothStrands: false
+                bothStrands: false,
+                style : {
+                    height: 100
+                }
             });
         },
 
