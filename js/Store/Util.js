@@ -3,7 +3,7 @@ define('NucleotideDensityPlugin/Store/Util',[
     'dojo/_base/array',
     'dojo/_base/lang',
     'dojo/json',
-    'dojo/text!plugins/NucleotideDensityPlugin/nucleotide_table.json'
+    'dojo/text!plugins/NucleotideDensityPlugin/js/nucleotide_table.json'
 ],
 function(
     declare,
