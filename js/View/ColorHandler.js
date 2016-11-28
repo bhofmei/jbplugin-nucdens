@@ -2,14 +2,12 @@ define('NucleotideDensityPlugin/View/ColorHandler',[
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
-    'dojox/color',
     'dojo/_base/Color',
 ],
 function(
     declare,
     array,
     lang,
-    dojoxColor,
     dojoColor
 
 ){

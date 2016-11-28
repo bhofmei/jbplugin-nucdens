@@ -8,7 +8,6 @@ define([
     'dojo/dom-attr',
     'dojo/on',
     "dojo/domReady!",
-    'dojo/request/script',
     'dijit/focus',
     "dijit/registry",
     'dijit/form/NumberSpinner',
@@ -16,9 +15,7 @@ define([
     'dijit/form/RadioButton',
     'dijit/form/ValidationTextBox',
     'dijit/form/TextBox',
-    "dijit/InlineEditBox",
     'JBrowse/View/Dialog/WithActionBar',
-    'dojox/widget/ColorPicker',
     'NucleotideDensityPlugin/View/ColorHandler'
 ],
 function(
@@ -31,7 +28,6 @@ function(
     domAttr,
     on,
     domReady,
-    dojoScript,
     focus,
     registry,
     NumberSpinner,
@@ -39,9 +35,7 @@ function(
     dijitRadioButton,
     ValidationTextBox,
     TextBox,
-    InlineEditBox,
     ActionBarDialog,
-    ColorPicker,
     ColorHandler
 ) {
     return declare(ActionBarDialog, {
