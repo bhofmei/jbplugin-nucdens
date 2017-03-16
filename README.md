@@ -1,12 +1,15 @@
-#Nucleotide Density Plugin
+# Nucleotide Density Plugin
 
-This is a JBrowse plugin
+This is a JBrowse plugin.
  
-Allows the user to create multi-lined heatmaps for different nucleotide contexts. User can set the color for each context, a single color for all contexts, or "random" colors will be chosen (see [below]).
-##Special Thanks
+Allows the user to create multi-lined heatmaps for different nucleotide contexts. User can set the color for each context, a single color for all contexts, or "random" colors will be chosen (see [below](#color-parameters)).
+## Special Thanks
 Special thanks to [Colin Diesh](http://cmdcolin.github.io/) who inspired components of this plugin. Particularly, the [GC Content plugin](https://github.com/elsiklab/gccontent) (for the storage class) and [Multi BigWig plugin](https://github.com/elsiklab/multibigwig) (for multiple density tracks).
 
-##Install
+"Random" color generation was possible thanks to [Chroma.js]
+(https://github.com/gka/chroma.js/). A copy downloaded March 16, 2017 is included in this plugin.
+
+## Install
 
 For JBrowse 1.11.6+ in the _JBrowse/plugins_ folder, type:  
 `git clone https://github.com/bhofmei/jbplugin-nucdens.git NucleotideDensityPlugin`
@@ -33,8 +36,8 @@ If that doesn't work, add this to _jbrowse_conf.json_:
     }
 ```
 
-##Using Nucleotide Density Traacks
-###Example
+## Using Nucleotide Density Traacks
+### Example
     {  
         "key" : "Nucleotide Density",
         "label" : "nuc_dens",
@@ -46,7 +49,7 @@ If that doesn't work, add this to _jbrowse_conf.json_:
 Sequence contexts must be specified in an array.   
 [Degenerate/IUPAC](http://www.bioinformatics.org/sms/iupac.html) nucleotides are supported. Gaps are not. Nucleotides can be lowercase or uppercase.
     
-###Color Parameters
+### Color Parameters
 For all contexts, density is indicated by the intensity of color. Color is computed as a blend between the background color and specified color weighted by the scaled density.  
 Density is scaled to the track configuration `min_score` and `max_score`.
  
@@ -78,7 +81,7 @@ Colors can be specified using a javascript object assigning a color to each cont
 
 ![Example for color parameters](img/example_colors.png)
   
-###Addititional Parameters
+### Addititional Parameters
 Additional parameters that can be specified for the track configuration.
 * `"min_score" : 0`  , minimum density when computing color
 * `"max_score" : 1`  , maximum density when computing color
@@ -90,6 +93,8 @@ Additional parameters that can be specified for the track configuration.
 * `"style" : { "height" : 70 }`  , track height
 
 
-##Future Plans
+## Future Plans
+- "Loading" screen when recomputing after changing a track setting
+- turn on/off labels using CSS without redrawing
 - Ability to add track locally by adding option to menu bar, "File"
 - Possibly improved score view (currently works fine but is not visually appealing)

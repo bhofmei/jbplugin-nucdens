@@ -1,4 +1,7 @@
 # Release notes
+v1.0 - Mar 16, 2017
+- random color generation based on number of contexts
+- uses chroma.js for color conversions in ColorHandler
 
 v0.6 - Nov 21, 2016
 - on hover over track, show density score for sequence contexts
