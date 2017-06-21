@@ -3,11 +3,11 @@
 This is a JBrowse plugin.
  
 Allows the user to create multi-lined heatmaps for different nucleotide contexts. User can set the color for each context, a single color for all contexts, or "random" colors will be chosen (see [below](#color-parameters)).
+
 ## Special Thanks
 Special thanks to [Colin Diesh](http://cmdcolin.github.io/) who inspired components of this plugin. Particularly, the [GC Content plugin](https://github.com/elsiklab/gccontent) (for the storage class) and [Multi BigWig plugin](https://github.com/elsiklab/multibigwig) (for multiple density tracks).
 
-"Random" color generation was possible thanks to [Chroma.js]
-(https://github.com/gka/chroma.js/). A copy downloaded March 16, 2017 is included in this plugin.
+"Random" color generation was possible thanks to [Chroma.js](https://github.com/gka/chroma.js/). A copy downloaded March 16, 2017 is included in this plugin.
 
 ## Install
 
@@ -19,32 +19,45 @@ For JBrowse 1.11.6+ in the _JBrowse/plugins_ folder, type:
 downloaded the latest release version at [releases](https://github.com/bhofmei/jbplugin-nucdens/releases).  
 Unzip the downloaded folder, place in _JBrowse/plugins_, and rename the folder _NucleotideDensityPlugin_
 
-##Activate
+## Activate
 
 Add this to _jbrowse.conf_ under `[GENERAL]`:
-```
-    [plugins.NucleotideDensityPlugin]
-    location = plugins/NucleotideDensityPlugin
+```toml
+[plugins.NucleotideDensityPlugin]
+location = plugins/NucleotideDensityPlugin
 ```
 
 If that doesn't work, add this to _jbrowse_conf.json_:
-```
-    "plugins" : {
-        "NucleotideDensityPlugin" : { 
-            "location" : "plugins/NucleotideDensityPlugin"
-        }
+```json
+"plugins" : {
+    "NucleotideDensityPlugin" : { 
+        "location" : "plugins/NucleotideDensityPlugin"
     }
+}
 ```
 
-## Using Nucleotide Density Traacks
+## Test
+Sample data is included in the plugin to test that the plugin is working properly. With `URL` as the URL path to the JBrowse instance, navigate a web browser to `URL/index.html?data=plugins/NucleotideDensityPlugin/test/data`.
+
+![Demo Image](img/demo_image.png)
+
+**Note**: sometimes the density doesn't fully load the first time. Deselect track and readd.
+
+## Using Nucleotide Density Tracks
+
+Loading the track may take awhile for large region and/or many contexts.
+
 ### Example
-    {  
-        "key" : "Nucleotide Density",
-        "label" : "nuc_dens",
-        "storeClass" : "JBrowse/Store/SeqFeature/SequenceChunks",
-        "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
-        "context" : ["CG", "CHG", "CHH", "NNN"]
-    }
+```json
+{  
+    "key" : "Nucleotide Density",
+    "label" : "nuc_dens",
+    "storeClass" : "JBrowse/Store/SeqFeature/SequenceChunks",
+    "type": "NucleotideDensityPlugin/View/Track/NucleotideDensity",
+    "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
+    "context" : ["CG", "CHG", "CHH", "C"]
+}
+```
     
 Sequence contexts must be specified in an array.   
 [Degenerate/IUPAC](http://www.bioinformatics.org/sms/iupac.html) nucleotides are supported. Gaps are not. Nucleotides can be lowercase or uppercase.
@@ -57,29 +70,34 @@ Color can be specified in four ways.
  
 1. Random [default]    
 Equidistant colors are assigned to each context based on the number of contexts specified. 
-```
+```json
     "colors": "random"
 ```
 
 2. Single Color    
 A single color is used for all contexts. Color can be specified as a string or hexidecimal value
-```
+```json
     "colors" : "hotpink"
 ```
 
 3. Array    
 Colors in the array for assigned to each context based on order. If there are more contexts than colors specified, colors are reused in order.
-```
+```json
     "colors" : ["red", "orange", "yellow", "greenyellow"]
 ```
 
 4. Object    
 Colors can be specified using a javascript object assigning a color to each context. If a context is not assigned a color, the cooresponding "random" color is used.
-```
-    "colors" : { "CG" : "#A36085", "CHG": "#0072B2", "CHH" : "#CF8F00", "CH" : "#88C043" }
+```json
+    "colors" : { "CG" : "#A36085", "CHG": "#0072B2", "CHH" : "#CF8F00", "C" : "#00c29b" }
 ```
 
-![Example for color parameters](img/example_colors.png)
+### Dialog Menu
+Many of the parameters and settings can be adjusted using a dialog box in the track menu. Contexts can be added and removed. Colors can be changed to any of the possible color parameter types. The minimum and maximum density can be set to improve visualization. And the window size and window delta can be adjusted.
+
+![Track menu](img/menu_image.png)
+
+![Dialog](img/dialog_image.png)
   
 ### Addititional Parameters
 Additional parameters that can be specified for the track configuration.
