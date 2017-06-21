@@ -1,4 +1,9 @@
 # Release notes
+
+v1.0.1 - Jun 21, 2017
+- fixed issue with dialog and array colors
+- added sample dataset to test plugin is installed correctly
+
 v1.0 - Mar 16, 2017
 - random color generation based on number of contexts
 - uses chroma.js for color conversions in ColorHandler
