@@ -57,7 +57,7 @@ function(
                 if(thisB.colorType === 'individual' && thisB.colors.hasOwnProperty(ctx))
                     return thisB.colors[ctx];
                 else
-                    return ColorHandler.contextToColorFromList(ctx, thisB.contexts, thisB.randomColors, false);
+                    return ColorHandler.contextToColorFromList(ctx, thisB.contexts, thisB.colors, false);
             });
 
             this.setCallback     = args.setCallback || function() {};
