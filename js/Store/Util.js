@@ -1,22 +1,36 @@
 define('NucleotideDensityPlugin/Store/Util',[
     'dojo/_base/declare',
     'dojo/_base/array',
-    'dojo/_base/lang',
-    'dojo/json',
-    'dojo/text!plugins/NucleotideDensityPlugin/nucleotide_table.json'
+    'dojo/_base/lang'
 ],
 function(
     declare,
     array,
-    lang,
-    JSON,
-    nucleotidetable
+    lang
 ){
     /*
         Utility class dealing with degenerate nucleotide sequences
     */
     var Util;
-    var ntable = JSON.parse(nucleotidetable);
+
+    var ntable = {
+        "A": ["A"],
+        "C": ["C"],
+        "G": ["G"],
+        "T": ["T"],
+        "U": ["T"],
+        "R": ["A", "G"],
+        "Y": ["C", "T"],
+        "S": ["C", "G"],
+        "W": ["A", "T"],
+        "K": ["G", "T"],
+        "M": ["A", "C"],
+        "B": ["C", "G", "T"],
+        "D": ["A", "G", "T"],
+        "H": ["A", "C", "T"],
+        "V": ["A", "C", "G"],
+        "N": ["A", "C", "G", "T"]
+    }
 
     Util = {
 
