@@ -66,17 +66,11 @@ function(
                 //console.log(residues.length);
                 for (var i = hw; i < residues.length - hw; i += thisB.windowDelta) {
 
-                    //console.log(thisB.nuc);
                     var r = residues.slice(i - hw, i + hw);
                     var rn = r.length - thisB.nucLength;
                     var nc = 0;
                     var ng = 0;
                     for (var j = 0; j < rn; j++) {
-                        /*if (r[j] === 'c' || r[j] === 'C') {
-                            nc++;
-                        } else if (r[j] === 'g' || r[j] === 'G') {
-                            ng++;
-                        }*/
                         var rs = r.slice(j, j+thisB.nucLength);
                         if(array.indexOf(thisB.nucAr, rs.toUpperCase()) !== -1)
                             nc++;
@@ -93,11 +87,6 @@ function(
                         thisB.stats.min = score;
                     if(score > thisB.stats.max)
                         thisB.stats.max = score;
-                    /*if (thisB.gcMode === 'content') {
-                        score = (ng + nc) / r.length;
-                    } else if (thisB.gcMode === 'skew') {
-                        score = (ng - nc) / (ng + nc);
-                    }*/
                     var n = thisB.nuc;
 
                     var feat = new CoverageFeature({
