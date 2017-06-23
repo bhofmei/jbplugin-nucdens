@@ -112,6 +112,7 @@ Additional parameters that can be specified for the track configuration.
 
 
 ## Future Plans
+- Jasmine testing
 - "Loading" screen when recomputing after changing a track setting
 - turn on/off labels using CSS without redrawing
 - Ability to add track locally by adding option to menu bar, "File"

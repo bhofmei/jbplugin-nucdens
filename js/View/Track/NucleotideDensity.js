@@ -3,6 +3,7 @@ define([
     'dojo/_base/array',
     'dojo/_base/lang',
    'dojo/_base/Color',
+    'dojo/colors',
     'JBrowse/View/Track/Wiggle/Density',
     'JBrowse/Util',
     'NucleotideDensityPlugin/Store/SeqFeature/NucDensityMulti',
@@ -14,6 +15,7 @@ function(
     array,
     lang,
     Color,
+     dojoColors,
     WiggleDensity,
     Util,
     NucContent,
@@ -67,6 +69,7 @@ function(
         },
 
         _calculatePixelScores: function(canvasWidth, features, featureRects) {
+            console.log(features.length, featureRects.length);
             var pixelValues = new Array(canvasWidth);
             array.forEach(features, function(f, i) {
                 var fRect = featureRects[i];
