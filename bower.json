@@ -1,0 +1,23 @@
+{
+  "name": "jbplugin-nucdens",
+  "homepage": "https://github.com/bhofmei/jbplugin-nucdens#readme",
+  "description": "JBrowse plugin for viewing nucleotide density",
+  "main": "js/main.js",
+  "keywords": [
+    "jbrowse",
+    "jbrowse-plugin",
+    "nucelotide density"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test"
+  ],
+  "devDependencies": {
+    "jasmine-core": "jasmine#^2.4.1",
+    "jbrowse": "git://github.com/GMOD/jbrowse.git#master"
+  }
+}
