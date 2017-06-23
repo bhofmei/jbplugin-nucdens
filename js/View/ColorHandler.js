@@ -1,4 +1,4 @@
-define('NucleotideDensityPlugin/View/ColorHandler',[
+define('NucleotideDensityPlugin/View/ColorHandler', [
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
@@ -12,25 +12,13 @@ function(
 
 ){
     /*
-        Utility class dealing with degenerate nucleotide sequences
+        Utility class dealing the various ways to specify colors
     */
 var ColorHandler;
 
 ColorHandler = {
 
-    generateRandomColors: function( labels ){
-        // take in list of labels and return object with equidistant colors
-        var rColors = this.generateNColors(labels.length);
-        var colors ={};
-        var i;
-        for(i=0; i<labels.length; i++){
-            colors[labels[i]] = rColors[i];
-        }
-        return colors;
-    },
-
     generateNColors: function(n){
-        var thisB = this;
         var s=100, l=65, sep=360/n;
         var hs=[];
         var i;
@@ -42,6 +30,17 @@ ColorHandler = {
             return t.hex();
         });
         return out;
+    },
+
+    generateRandomColors: function( labels ){
+        // take in list of labels and return object with equidistant colors
+        var rColors = ColorHandler.generateNColors(labels.length);
+        var colors ={};
+        var i;
+        for(i=0; i<labels.length; i++){
+            colors[labels[i]] = rColors[i];
+        }
+        return colors;
     },
 
     getFontColor: function(color){
@@ -57,22 +56,37 @@ ColorHandler = {
             return '#010101';
     },
 
+    contextToColorFromList: function(seqCtx, contextList, colorList, repeatable){
+        var k = 0;
+        for(k=0; k<contextList.length; k++)
+            if(contextList[k]===seqCtx)
+                break;
+        return ColorHandler.intToColorFromList(k, colorList, repeatable);
+    },
+
+    intToColorFromList: function(n, colorList, repeatable){
+        if(n >= colorList.length && !repeatable)
+            return undefined;
+        n %= colorList.length;
+        return colorList[n];
+    },
+
     getConfigColor: function( seqCtx, contextConfig, colorConfig, randomColors ){
         // random
         if(colorConfig === 'random')
-            return randomColors[seqCtx]
+            return randomColors[seqCtx];
         // other string
         else if(typeof colorConfig === 'string')
-            return colorConfig
+            return colorConfig;
         // array
         else if(Array.isArray(colorConfig)){
-            return this.contextToColorFromList(seqCtx, contextConfig, colorConfig, true);
+            return ColorHandler.contextToColorFromList(seqCtx, contextConfig, colorConfig, true);
         }
         // object
         else if(colorConfig.hasOwnProperty(seqCtx))
-            return colorConfig[seqCtx]
+            return colorConfig[seqCtx];
         else
-            return randomColors[seqCtx]
+            return randomColors[seqCtx];
     },
 
     getColorType: function( colorConfig ){
@@ -83,22 +97,7 @@ ColorHandler = {
             return 'single';
         else
             return 'individual';
-    },
-
-    contextToColorFromList: function(seqCtx, contextList, colorList, repeatable=true){
-        var k = 0;
-        for(k=0; k<contextList.length; k++)
-            if(contextList[k]===seqCtx)
-                break;
-        return this.intToColorFromList(k, colorList, repeatable);
-    },
-
-    intToColorFromList: function(n, colorList, repeatable){
-        if(n >= colorList.length && !repeatable)
-            return undefined;
-        n %= colorList.length;
-        return colorList[n];
     }
-    }
+}
 return ColorHandler;
 });
