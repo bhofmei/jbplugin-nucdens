@@ -2,17 +2,21 @@ require([
     'dojo/_base/declare',
     'dojo/_base/array',
     'JBrowse/Browser',
+    'JBrowse/Store/SeqFeature/SequenceChunks',
     'NucleotideDensityPlugin/View/ColorHandler',
     'NucleotideDensityPlugin/View/Track/NucleotideDensity',
     'NucleotideDensityPlugin/Store/SeqFeature/NucDensity',
+    'NucleotideDensityPlugin/Store/SeqFeature/NucDensityMulti',
     'NucleotideDensityPlugin/Store/Util'
     ], function(
         declare,
         array,
         Browser,
+        SequenceChunks,
         ColorHandler,
         nucDensTrack,
         nucDensStore,
+        nucDensMultiStore,
         nucDensUtil
     ) {
 
@@ -107,6 +111,59 @@ require([
             expect(clr2).toBe('pink');
         });
     }); // end test color handler
+
+  describe('test stores', function(){
+    var browser = new Browser({unitTestMode: true});
+    browser.refSeq = {
+      length: 500001
+    };
+    var seqstore = new SequenceChunks({
+      urlTemplate: "../data/seq/{refseq_dirpath}/{refseq}-",
+      refSeq: { name: 'Chr5', start: 0, end: 50001 },
+      label: "refseqs",
+      browser: browser
+    });
+    describe('test single store', function(){
+      var store = nucDensStore({
+        store: seqstore,
+        browser: browser,
+        windowSize: 2000,
+        windowDelta: 2000,
+        nuc: 'TA',
+        label: 'single.nucleotide.density.track'
+      });
+      var features = [];
+      beforeEach(function(done){
+        store.getFeatures({ref:'Chr5', start: 0, end: 12001}, function(feature){
+          features.push(feature);
+        }, function(){
+          done();
+        }, function(error){
+          console.error(error);
+          done();
+        });
+      });
+      afterEach(function(){
+        features = [];
+      });
+
+      it('store exists', function(){
+        expect(store).toBeTruthy();
+      });
+      it('features length', function(){
+        //console.log(JSON.stringify(features));
+        expect(features.length).toBe(6);
+      });
+      it('features values', function(){
+        var scores = array.map(features, function(feat){ return feat.score; });
+        var expected = [0.062, 0.1015, 0.1165, 0.1085, 0.0885, 0.0895];
+        for(var i=0; i < scores.length; i++){
+          expect(scores[i]).toBeClose(expected[i],3);
+        }
+      });
+
+    });
+  });
 
 });
 
