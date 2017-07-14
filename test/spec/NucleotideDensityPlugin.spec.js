@@ -157,11 +157,73 @@ require([
       it('features values', function(){
         var scores = array.map(features, function(feat){ return feat.score; });
         var expected = [0.062, 0.1015, 0.1165, 0.1085, 0.0885, 0.0895];
-        for(var i=0; i < scores.length; i++){
-          expect(scores[i]).toBeClose(expected[i],3);
+        var i;
+        for(i=0; i < scores.length; i++){
+          expect(scores[i]).toBeCloseTo(expected[i],3);
         }
       });
 
+    });
+
+    describe('test multi store', function(){
+      var store = nucDensMultiStore({
+        store: seqstore,
+        browser: browser,
+        windowSize: 2000,
+        windowDelta: 2000,
+        contexts: ['Y','KH','NNN'],
+        label: 'multi.nucleotide.density.track'
+      });
+      var features = [];
+      beforeEach(function(done){
+        store.getFeatures({ref:'Chr5', start: 0, end: 12001}, function(feature){
+          features.push(feature);
+        }, function(){
+          done();
+        }, function(error){
+          console.error(error);
+          done();
+        });
+      });
+      afterEach(function(){
+        features = [];
+      });
+
+      it('store exists', function(){
+        expect(store).toBeTruthy();
+      });
+      it('features length', function(){
+        //console.log(JSON.stringify(features));
+        expect(features.length).toBe(18);
+      });
+      it('features values - Y', function(){
+        features = array.filter(features, function(feat){return feat.name === 'Y'});
+        var scores = array.map(features, function(feat){ return feat.score; });
+        var expected = [0.535732, 0.521239, 0.502749, 0.492754, 0.531734, 0.488256];
+        var i;
+        for(i=0; i < scores.length; i++){
+          expect(scores[i]).toBeCloseTo(expected[i],3);
+        }
+      });
+
+      it('features values - KH', function(){
+        features = array.filter(features, function(feat){return feat.name === 'KH'});
+        var scores = array.map(features, function(feat){ return feat.score; });
+        var expected = [0.4115, 0.4365, 0.407, 0.426, 0.4295, 0.419];
+        var i;
+        for(i=0; i < scores.length; i++){
+          expect(scores[i]).toBeCloseTo(expected[i],3);
+        }
+      });
+      it('features values - NNN', function(){
+        features = array.filter(features, function(feat){return feat.name === 'NNN'});
+        var scores = array.map(features, function(feat){ return feat.score; });
+        var expected = [1, 1, 1, 1, 1, 1];
+        var i;
+        for(i=0; i < scores.length; i++){
+          expect(scores[i]).toBeCloseTo(expected[i],3);
+        }
+      });
     });
   });
 
