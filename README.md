@@ -22,7 +22,7 @@ Unzip the downloaded folder, place in _JBrowse/plugins_, and rename the folder _
 ## Activate
 
 Add this to _jbrowse.conf_ under `[GENERAL]`:
-```toml
+```
 [plugins.NucleotideDensityPlugin]
 location = plugins/NucleotideDensityPlugin
 ```
