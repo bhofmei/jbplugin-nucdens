@@ -67,7 +67,7 @@ function(
                 for (var i = hw; i < residues.length - hw; i += thisB.windowDelta) {
 
                     var r = residues.slice(i - hw, i + hw);
-                    var rn = r.length - thisB.nucLength;
+                    var rn = r.length - thisB.nucLength+1;
                     var nc = 0;
                     var ng = 0;
                     for (var j = 0; j < rn; j++) {
@@ -88,10 +88,10 @@ function(
                     if(score > thisB.stats.max)
                         thisB.stats.max = score;
                     var n = thisB.nuc;
-
+                    var fStart = pos + i - thisB.windowDelta / 2.0;
                     var feat = new CoverageFeature({
-                        start: pos + i,
-                        end: pos + i + thisB.windowDelta,
+                      start: fStart,
+                      end: fStart+thisB.windowDelta,
                         score: score,
                         name: n
                     });

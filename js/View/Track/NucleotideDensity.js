@@ -69,7 +69,6 @@ function(
         },
 
         _calculatePixelScores: function(canvasWidth, features, featureRects) {
-            console.log(features.length, featureRects.length);
             var pixelValues = new Array(canvasWidth);
             array.forEach(features, function(f, i) {
                 var fRect = featureRects[i];
