@@ -1,5 +1,9 @@
 # Release notes
 
+v1.0.3 - Jul 14, 2017
+- realigned the density values in the track view to be centered on the region computed for
+- added jasmine testing
+
 v1.0.2 - Jun 23, 2017
 - fixed issue when using color values names; all CSS3 color names are supported
 
