@@ -1,7 +1,7 @@
 {
   "name": "jbplugin-smallrna",
-  "version": "1.3.1",
-  "description": "JBrowse plugin for viewing small RNA alignments",
+  "version": "1.0.2",
+  "description": "Multiple heatmap-style plots for user-specified sequence contexts",
   "main": "js/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,17 +9,18 @@
 
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhofmei/jbplugin-smallrna.git"
+    "url": "git+https://github.com/bhofmei/jbplugin-nucdens.git"
   },
   "keywords": [
     "jbrowse",
     "jbrowse-plugin",
-    "small rna"
+    "nucleotide contexts",
+    "nucleotide density"
   ],
   "author": "Brigitte Hofmeister",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bhofmei/jbplugin-smallrna/issues"
+    "url": "https://github.com/bhofmei/jbplugin-nucdens/issues"
   },
   "ignore": [
     "node_modules",
@@ -28,5 +29,5 @@
   "directories": {
     "test": "test"
   },
-  "homepage": "https://github.com/bhofmei/jbplugin-smallrna#readme"
+  "homepage": "https://github.com/bhofmei/jbplugin-nucdens#readme"
 }
