@@ -1,7 +1,7 @@
 # Nucleotide Density Plugin
 
-This is a JBrowse plugin.
- 
+[![Build Status](https://travis-ci.org/bhofmei/jbplugin-nucdens.svg?branch=master)](https://travis-ci.org/bhofmei/jbplugin-nucdens)
+
 Allows the user to create multi-lined heatmaps for different nucleotide contexts. User can set the color for each context, a single color for all contexts, or "random" colors will be chosen (see [below](#color-parameters)).
 
 ## Special Thanks
@@ -112,7 +112,6 @@ Additional parameters that can be specified for the track configuration.
 
 
 ## Future Plans
-- Jasmine testing
 - "Loading" screen when recomputing after changing a track setting
 - turn on/off labels using CSS without redrawing
 - Ability to add track locally by adding option to menu bar, "File"
