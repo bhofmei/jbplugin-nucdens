@@ -1,4 +1,6 @@
 # Release notes
+v1.0.4 - Jul 17, 2017
+- show/hide track sublabels (the contexts) without redrawing entire track
 
 v1.0.3 - Jul 14, 2017
 - realigned the density values in the track view to be centered on the region computed for

@@ -2,6 +2,7 @@ define([
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
+    'dojo/query',
    'dojo/_base/Color',
     'dojo/colors',
     'JBrowse/View/Track/Wiggle/Density',
@@ -14,6 +15,7 @@ function(
     declare,
     array,
     lang,
+     query,
     Color,
      dojoColors,
     WiggleDensity,
@@ -281,7 +283,8 @@ function(
                     checked: track.config.showLabels,
                     onClick: function(evt){
                         track.config.showLabels = this.checked;
-                        track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
+                        query('#track_'+track.config.label+' div.track-sublabels').style('display',this.checked ? 'block' : 'none');
+
                     }
                 },
                 {
