@@ -1,6 +1,6 @@
 {
-  "name": "jbplugin-smallrna",
-  "version": "1.0.2",
+  "name": "NucleotideDensityPlugin",
+  "version": "1.0.4",
   "description": "Multiple heatmap-style plots for user-specified sequence contexts",
   "main": "js/main.js",
   "scripts": {
