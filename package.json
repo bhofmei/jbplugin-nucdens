@@ -4,8 +4,6 @@
   "description": "Multiple heatmap-style plots for user-specified sequence contexts",
   "main": "js/main.js",
   "scripts": {
-    "preinstall": "export YN=1",
-    "postinstall": "unset YN",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
