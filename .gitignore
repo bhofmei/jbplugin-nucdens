@@ -4,4 +4,4 @@ test/*
 !test/spec
 !test/run-jasmine.js
 !test/data
-built
+node_modules

@@ -4,9 +4,10 @@
   "description": "Multiple heatmap-style plots for user-specified sequence contexts",
   "main": "js/main.js",
   "scripts": {
+    "preinstall": "export YN=1",
+    "postinstall": "unset YN",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bhofmei/jbplugin-nucdens.git"
@@ -29,5 +30,9 @@
   "directories": {
     "test": "test"
   },
-  "homepage": "https://github.com/bhofmei/jbplugin-nucdens#readme"
+  "homepage": "https://github.com/bhofmei/jbplugin-nucdens#readme",
+     "devDependencies": {
+    "jasmine": "^2.7.0",
+    "jbrowse" : "git+https://github.com/bhofmei/jbrowse"
+  }
 }
