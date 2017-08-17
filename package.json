@@ -1,5 +1,5 @@
 {
-  "name": "NucleotideDensityPlugin",
+  "name": "jbplugin-nucdens",
   "version": "1.0.4",
   "description": "Multiple heatmap-style plots for user-specified sequence contexts",
   "main": "js/main.js",
@@ -17,7 +17,7 @@
     "nucleotide density"
   ],
   "author": "Brigitte Hofmeister",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/bhofmei/jbplugin-nucdens/issues"
   },
