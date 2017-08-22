@@ -115,4 +115,3 @@ Additional parameters that can be specified for the track configuration.
 - "Loading" screen when recomputing after changing a track setting
 - Ability to add track locally by adding option to menu bar, "File"
 - Possibly improved score view (currently works fine but is not visually appealing)
-- SVG-based track (compared to current canvas-based) for improved screenshots

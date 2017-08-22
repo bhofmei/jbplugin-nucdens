@@ -1,4 +1,8 @@
 # Release notes
+
+v1.1.0 - Aug 22, 2017
+- SVG density tracks (useful for screenshots)
+
 v1.0.4 - Jul 17, 2017
 - show/hide track sublabels (the contexts) without redrawing entire track
 

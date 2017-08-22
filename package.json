@@ -1,6 +1,6 @@
 {
   "name": "jbplugin-nucdens",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Multiple heatmap-style plots for user-specified sequence contexts",
   "main": "js/main.js",
   "scripts": {
