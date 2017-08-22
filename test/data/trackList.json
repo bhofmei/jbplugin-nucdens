@@ -85,6 +85,21 @@
                 "CHH" : "#CF8F00",
                 "C" : "#00c29b"
             }
+        },
+      {
+            "key" : "Object colors - svg",
+            "label" : "nuc_dens5",
+            "category" : "Test data",
+            "storeClass" : "JBrowse/Store/SeqFeature/SequenceChunks",
+            "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
+            "type": "NucleotideDensityPlugin/View/Track/NucleotideSVGDensity",
+            "context" : ["CG", "CHG", "CHH", "C"],
+            "colors" : {
+                "CG" : "#A36085",
+                "CHG": "#0072B2",
+                "CHH" : "#CF8F00",
+                "C" : "#00c29b"
+            }
         }
     ]
 }
